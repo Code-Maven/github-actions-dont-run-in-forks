@@ -1,0 +1,18 @@
+name: Don't run in forked repositories
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if running in a fork
+        run: |
+          if [ "${{ github.repository_owner }}" != "code-maven" ]; then
+            echo "Running in a forked repository"
+          else
+            echo "Running in the original repository"
+          fi
+
+      - name: Run only on the "real" repository
+        if ${{ github.repository_owner }}" != "code-maven"
+        run: |
+          echo "Running in the original repository"
